@@ -1,12 +1,21 @@
 import { Button, SafeAreaView, Text,
-     View,Platform,StatusBar, StyleSheet, TouchableOpacity } from 'react-native'
-import React, { Component } from 'react'
+     View,Platform,StatusBar, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
+import React, { Component, useState } from 'react'
 import Task from '../components/Task'
 import Icon from "react-native-vector-icons/Entypo"
+import { Dialog, TextInput } from 'react-native-paper'
 //import { useNavigation } from '@react-navigation/native'
 
 const Home = ({navigation}) => {
 //   const navigation = useNavigation()
+const [openDialog, setOpenDialog] = useState(false);
+const [title, setTitle] = useState("");
+const [description, setDescription] = useState("");
+
+const hideDialog = () => {
+    setOpenDialog(!openDialog)
+}
+
 const tasks=[{
     title: '1',
     description: '12',
@@ -23,12 +32,17 @@ const tasks=[{
                     <SafeAreaView>
                         <Text style={styles.heading}>All Tasks</Text>
 
-                        {user && user.tasks.map((item) => (
+                        {
+                        // user
+                        //  && user.
+                         tasks.map((item) => (
                             <Task key={item._id} title={item.title} description={item.description} status={item.completed} taskId={item._id} />
                         ))}
 
 
-                        <TouchableOpacity style={styles.addBtn} onPress={hideDialog}>
+                        <TouchableOpacity style={styles.addBtn} 
+                        onPress={hideDialog}
+                        >
 
                             <Icon name='add-to-list' size={20} color="#900" />
 
@@ -46,14 +60,14 @@ const tasks=[{
                     <TextInput
                         style={styles.input}
                         placeholder="Title"
-                        value={title}
-                        onChangeText={setTitle}
+                        // value={title}
+                        // onChangeText={setTitle}
                     />
                     <TextInput
                         style={styles.input}
                         placeholder="Description"
-                        value={description}
-                        onChangeText={setDescription}
+                        // value={description}
+                        // onChangeText={setDescription}
                     />
 
                     <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -61,9 +75,9 @@ const tasks=[{
                             <Text>CANCEL</Text>
                         </TouchableOpacity>
                         <Button
-                            onPress={addTaskHandler}
+                            // onPress={addTaskHandler}
                             color="#900"
-                            disabled={!title || !description || loading}
+                            // disabled={!title || !description || loading}
                         >
                             ADD
                         </Button>
